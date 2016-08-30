@@ -14,6 +14,8 @@ f = csv.reader(open(fileInput,"rU"), delimiter='\t')
 genotype = []
 haplotype = []
 mutationCount = [0]*GenotypeNum
+genCount=0
+hapCount=0
 
 #output = csv.writer(open("JuvenileMutations.vcf","w"), delimiter='\t')
 
@@ -31,11 +33,12 @@ for line in f:
                 haplotype.append(line[i].split(':')[0].split('/')[1])
         rareGenotype = [x for x in genotype if genotype.count(x) == 1]
         rareHaplotype = [x for x in haplotype if haplotype.count(x) == 1]
-        if len(rareGenotype) > 0 and len(rareHaplotype) == 0:
+        if len(rareGenotype) > 0:
             for i in range(0,len(rareGenotype)):
                 if rareGenotype != ['./.']: Index = int(genotype.index(rareGenotype[i]))
                 if j >= 15 and rareGenotype != ['./.']:
                     mutationCount[Index] = mutationCount[Index]+1
+                    genCount=genCount+1
                     print 'Single genotype',j,len(genotype),rareGenotype,Index,genotype
                     print mutationCount
         if len(rareHaplotype) > 0 and len(rareGenotype) == 0:
@@ -43,8 +46,10 @@ for line in f:
                 if rareHaplotype != ['./.']: Index = int(haplotype.index(rareHaplotype[i])/2)
                 if j >= 15 and rareHaplotype != ['.']:
                     mutationCount[Index] = mutationCount[Index]+1
+                    hapCount=hapCount+1
                     print 'Single haplotype',j,len(haplotype),rareHaplotype,Index,haplotype
                     print mutationCount
+        print hapCount,genCount
         genotype=[]
         haplotype=[]
 print mutationCount
