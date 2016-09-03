@@ -14,14 +14,11 @@ f = csv.reader(open(fileInput,"rU"), delimiter='\t')
 genotype = []
 haplotype = []
 mutationCount = [0]*GenotypeNum
-genCount=0
-hapCount=0
 
 #output = csv.writer(open("JuvenileMutations.vcf","w"), delimiter='\t')
 
+lc = 0
 for line in f:
-#    if line[0].startswith('#') == True and line[0].startswith('##') == False:
-#        output.writerow(line)
     if line[0].startswith('#') == False:
         j=0
 	for i in range(0, len(line)):
@@ -31,25 +28,17 @@ for line in f:
                 genotype.append(line[i].split(':')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[1])
-        rareGenotype = [x for x in genotype if genotype.count(x) == 1]
-        rareHaplotype = [x for x in haplotype if haplotype.count(x) == 1]
-        if len(rareGenotype) > 0:
-            for i in range(0,len(rareGenotype)):
-                if rareGenotype != ['./.']: Index = int(genotype.index(rareGenotype[i]))
-                if j >= 15 and rareGenotype != ['./.']:
+        if j >= 15:
+            for k in range(0,3):
+                if haplotype.count(str(k)) == 1:
+                    Index = int(haplotype.index(str(k))/2)
                     mutationCount[Index] = mutationCount[Index]+1
-                    genCount=genCount+1
-                    print 'Single genotype',j,len(genotype),rareGenotype,Index,genotype
-                    print mutationCount
-        if len(rareHaplotype) > 0 and len(rareGenotype) == 0:
-            for i in range(0,len(rareHaplotype)):
-                if rareHaplotype != ['./.']: Index = int(haplotype.index(rareHaplotype[i])/2)
-                if j >= 15 and rareHaplotype != ['.']:
-                    mutationCount[Index] = mutationCount[Index]+1
-                    hapCount=hapCount+1
-                    print 'Single haplotype',j,len(haplotype),rareHaplotype,Index,haplotype
-                    print mutationCount
-        print hapCount,genCount
+                if haplotype.count(str(k)) == 2:
+                    seq = str(k),'/',str(k)
+                    homozygote = str(''.join(seq))
+                    if homozygote in genotype:
+                        Index = int(genotype.index(str(homozygote)))
+                        mutationCount[Index] = mutationCount[Index]+1
         genotype=[]
         haplotype=[]
 print mutationCount
