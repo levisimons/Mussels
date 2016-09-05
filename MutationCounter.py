@@ -27,7 +27,7 @@ for line in f:
                 haplotype.append(line[i].split(':')[0].split('/')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[1])
         if j >= 15:
-            for k in range(0,3):
+            for k in range(0,4):
                 if haplotype.count(str(k)) == 1:
                     Index = int(haplotype.index(str(k))/2)
                     mutationCount[Index] = mutationCount[Index]+1
