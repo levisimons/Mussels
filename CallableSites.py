@@ -12,8 +12,6 @@ print filenames
 
 #Initialize the first comparison file from the first position file.
 referenceName = {}
-name = []
-num = []
 
 #Function reads in a comparison file as a reference.  Then it reads
 #in the next position file.  If the next position file has an entry
@@ -29,14 +27,19 @@ def fileRead(index):
     print index,filenames[index]
     for line in f1:
         if line[0].startswith('#') == False:
-            row = ','.join(line)
+            chrom = line[0]
+            pos = line[1]
             if index == 0:
-                referenceName[row] = referenceName.get(row,1)
+                if chrom not in referenceName.keys():
+                    referenceName[chrom] = referenceName.get(chrom,{})
+                    referenceName[chrom][pos] = referenceName[chrom].get(pos,1)
             if index > 0:
-                if row in referenceName:
-                    referenceName[row] = referenceName.get(row,0)+1
+                if chrom in referenceName.keys():
+                    referenceName[chrom] = referenceName.get(chrom,{})
+                    referenceName[chrom][pos] = referenceName[chrom].get(pos,0)+1
                 else:
-                    referenceName[row] = referenceName.get(row,1)
+                    referenceName[chrom] = referenceName.get(chrom,{})
+                    referenceName[chrom][pos] = referenceName[chrom].get(pos,1)
     fileInput.close()
 
 #Call the fileRead function and loop through all position files.
@@ -51,7 +54,8 @@ f0 = open(comparison, "w")
 output = csv.writer(f0, delimiter='\t')
 header = ['#CHROM','POS','Count']
 output.writerow(header)
-for row in referenceName:
-    entry = row.split(',')[0],row.split(',')[1],referenceName[row]
-    output.writerow(entry)
+for chrom in referenceName:
+    for pos in referenceName[chrom]:
+        row = chrom,pos,referenceName[chrom][pos]
+        output.writerow(row)
 f0.close()
