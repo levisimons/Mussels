@@ -3,12 +3,14 @@ import csv
 import subprocess
 
 #Get all of the position files in all of the first-level subdirectories.
+j=0
 filenames = []
 for subdir, dirs, files in os.walk('.'):
     for file in files:
         if file[-3:] == 'pos':
-            if 'FP' or 'MP' not in file:
+            if 'FP' or 'MP' not in file[j]:
                 filenames.append(os.path.join(subdir, file))
+            j=j+1
 print filenames
 
 #Initialize the first comparison file from the first position file.
