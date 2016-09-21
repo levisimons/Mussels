@@ -7,7 +7,8 @@ filenames = []
 for subdir, dirs, files in os.walk('.'):
     for file in files:
         if file[-3:] == 'pos':
-            filenames.append(os.path.join(subdir, file))
+            if 'FP' or 'MP' not in file:
+                filenames.append(os.path.join(subdir, file))
 print filenames
 
 #Initialize the first comparison file from the first position file.
