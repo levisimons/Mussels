@@ -1,12 +1,17 @@
-import os, re, sys
+import os,re,sys
 import csv
 
 #Get all of the position files in all of the first-level subdirectories.
+#Filter out parental files.
 filenames = []
 for subdir, dirs, files in os.walk('.'):
     for file in files:
         if file[-3:] == 'pos':
-            filenames.append(os.path.join(subdir, file))
+                filestring = str(os.path.join(subdir, file))
+                filenames.append(filestring)
+                if 'MP' in filestring: filenames.remove(filestring)
+                if 'FP' in filestring: filenames.remove(filestring)
+print filenames
 
 #Store the list of high quality sites for the juvenile mussel population
 # into a nested dictionary.  Sites called in more than a certain number of
