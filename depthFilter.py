@@ -22,13 +22,13 @@ for line in f:
 	output.writerow(outline)
 	if line[0].startswith('#') == False:
 		outline = []
-	for i in range(0, len(line)):
-		outline.append(line[i])
-	for i in range(0,len(outline)):
-		if i not in (0,1,2,3,4,5,6,7,8,9,20,21,32,33,44):
-			DP = line[i].split(':')[2]
-			if DP != '.':
-				if int(DP) < 4:
-					blank = './.:.:.:.:.'
-					outline[i] = blank
-	output.writerow(outline)
+		for i in range(0, len(line)):
+			outline.append(line[i])
+		for i in range(0,len(outline)):
+			if i not in (0,1,2,3,4,5,6,7,8,9,20,21,32,33,44):
+				DP = line[i].split(':')[2]
+				if DP != '.':
+					if int(DP) < 4:
+						blank = './.:.:.:.:.'
+						outline[i] = blank
+		output.writerow(outline)
