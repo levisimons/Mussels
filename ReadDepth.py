@@ -28,5 +28,8 @@ header = ['CHROM','POS','12x10_FP','12x10_J01','12x10_J02','12x10_J03','12x10_J0
 
 for i in range(2,len(header)):
     print i,header[i]
+    index = i
+    if index == 2:
+        depthGraph(index)
 
 
