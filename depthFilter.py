@@ -2,7 +2,7 @@ import os,sys,re
 import csv
 
 fileInput = "SOL_MYTILUS.VF.SNP.vcf"
-fileOutput = "SOL_MYTILUS.VF.SNP.Filtergt4.vcf"
+fileOutput = "SOL_MYTILUS.VF.SNP.FilterGT4.vcf"
 
 #Open the vcf file containing all the loci where potential SNPs are located.
 #Filter out the headers.
@@ -12,8 +12,14 @@ fileOutput = "SOL_MYTILUS.VF.SNP.Filtergt4.vcf"
 #Check for individuals with a unique homozygotic genotype at that loci.
 #Count up each instance for each individual.
 f = csv.reader(open(fileInput,"rU"), delimiter='\t')
+f0 = open(fileOutput, "w")
+output = csv.writer(f0, delimiter='\t')
 
 for line in f:
+	outline = []
+	for i in range(0, len(line)):
+		outline.append(line[i])
+	output.writerow(outline)
     if line[0].startswith('#') == False:
 	outline = []
 	for i in range(0, len(line)):
@@ -25,6 +31,5 @@ for line in f:
 				if int(DP) < 4:
 					blank = './.:.:.:.:.'
 					outline[i] = blank
-	print line
-	print outline
+	output.writerow(outline)
                 
