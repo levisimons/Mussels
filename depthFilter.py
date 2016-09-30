@@ -20,5 +20,8 @@ for line in f:
     if line[0].startswith('#') == False:
 	for i in range(0, len(line)):
             if i not in (0,1,2,3,4,5,6,7,8,9,20,21,32,33,44):
-		print line[i].split(':')[2]
+		DP = line[i].split(':')[2]
+		if DP != '.':
+			if DP < 4:
+				print line
                 
