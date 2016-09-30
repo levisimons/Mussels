@@ -20,8 +20,8 @@ for line in f:
 	for i in range(0, len(line)):
 		outline.append(line[i])
 	output.writerow(outline)
-    if line[0].startswith('#') == False:
-	outline = []
+	if line[0].startswith('#') == False:
+		outline = []
 	for i in range(0, len(line)):
 		outline.append(line[i])
 	for i in range(0,len(outline)):
@@ -32,4 +32,3 @@ for line in f:
 					blank = './.:.:.:.:.'
 					outline[i] = blank
 	output.writerow(outline)
-                
