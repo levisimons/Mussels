@@ -19,12 +19,15 @@ mutationCount = [0]*GenotypeNum
 for line in f:
     if line[0].startswith('#') == False:
 	for i in range(0, len(line)):
-		outline = [None]*len(line)
-		outline[i] = line[i]
+		outline = []
+		outline[i].append(line[i])
+	for i in range(0,len(outline)):
 		if i not in (0,1,2,3,4,5,6,7,8,9,20,21,32,33,44):
 			DP = line[i].split(':')[2]
 			if DP != '.':
 				if int(DP) < 4:
 					blank = './.:.:.:.:.'
-					print i,line[i]
+					outline[i] = blank
+	print line
+	print outline
                 
