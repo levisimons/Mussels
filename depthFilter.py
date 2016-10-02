@@ -5,12 +5,8 @@ fileInput = "SOL_MYTILUS.VF.SNP.vcf"
 fileOutput = "SOL_MYTILUS.VF.SNP.FilterGT4.vcf"
 
 #Open the vcf file containing all the loci where potential SNPs are located.
-#Filter out the headers.
-#Filter out the adults genome columns as well as the loci metadata columns.
-#Filter out loci with less than half of the individuals counted.
-#Check for individuals with a unique haplotype at that loci.
-#Check for individuals with a unique homozygotic genotype at that loci.
-#Count up each instance for each individual.
+#Replace any SNP for an individual with a read depth of less than four with
+#a blank field.
 f = csv.reader(open(fileInput,"rU"), delimiter='\t')
 f0 = open(fileOutput, "w")
 output = csv.writer(f0, delimiter='\t')
@@ -20,8 +16,7 @@ for line in f:
 		outline = []
 		for i in range(0, len(line)):
 			outline.append(line[i])
-		#output.writerow(outline)
-		print outline
+		output.writerow(outline)
 	if line[0].startswith('#') == False:
 		outline = []
 		for i in range(0, len(line)):
@@ -33,5 +28,4 @@ for line in f:
 					if int(DP) < 4:
 						blank = './.:.:.:.:.'
 						outline[i] = blank
-		#output.writerow(outline)
-		print outline
+		output.writerow(outline)
