@@ -16,10 +16,12 @@ f0 = open(fileOutput, "w")
 output = csv.writer(f0, delimiter='\t')
 
 for line in f:
-	outline = []
-	for i in range(0, len(line)):
-		outline.append(line[i])
-	output.writerow(outline)
+	if line[0].startswith('#') == True:
+		outline = []
+		for i in range(0, len(line)):
+			outline.append(line[i])
+		#output.writerow(outline)
+		print outline
 	if line[0].startswith('#') == False:
 		outline = []
 		for i in range(0, len(line)):
@@ -31,4 +33,5 @@ for line in f:
 					if int(DP) < 4:
 						blank = './.:.:.:.:.'
 						outline[i] = blank
-		output.writerow(outline)
+		#output.writerow(outline)
+		print outline
