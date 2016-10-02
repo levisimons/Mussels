@@ -39,4 +39,6 @@ for line in f:
                         mutationCount[Index] = mutationCount[Index]+1
         genotype=[]
         haplotype=[]
-print mutationCount
+
+for i in range(0,len(mutationCount)):	
+	print mutationCount[i]
