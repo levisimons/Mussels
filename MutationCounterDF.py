@@ -29,18 +29,20 @@ for line in f:
                 haplotype.append(line[i].split(':')[0].split('/')[1])
 		if line[i].split(':')[1] != '.':
 			alleleDepth.append(line[i].split(':')[1])
-		print j,alleleDepth
+		#print j,alleleDepth
         if j >= 15:
             for k in range(0,4):
                 if haplotype.count(str(k)) == 1:
                     Index = int(haplotype.index(str(k))/2)
                     mutationCount[Index] = mutationCount[Index]+1
+		    print line,Index,alleleDepth[Index]
                 if haplotype.count(str(k)) == 2:
                     seq = str(k),'/',str(k)
                     homozygote = str(''.join(seq))
                     if homozygote in genotype:
                         Index = int(genotype.index(str(homozygote)))
                         mutationCount[Index] = mutationCount[Index]+1
+			print line,Index,alleleDepth[Index]
         genotype=[]
         haplotype=[]
 	alleleDepth = []
