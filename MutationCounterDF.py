@@ -41,6 +41,8 @@ for line in f:
                     if homozygote in genotype:
                         Index = int(genotype.index(str(homozygote)))
                         mutationCount[Index] = mutationCount[Index]+1
+			if juveniles[Index].split(':')[1].split(',')[k] >= 4:
+			print juveniles,juveniles[Index]
         genotype=[]
         haplotype=[]
 	juveniles = []
