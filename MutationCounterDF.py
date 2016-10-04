@@ -14,6 +14,7 @@ GenotypeNum = 30
 f = csv.reader(open(fileInput,"rU"), delimiter='\t')
 genotype = []
 haplotype = []
+alleleDepth = []
 mutationCount = [0]*GenotypeNum
 
 for line in f:
@@ -26,7 +27,9 @@ for line in f:
                 genotype.append(line[i].split(':')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[1])
-		print line[i].split(':')[1]
+		alleleDepth.append(line[i].split(':')[1].aplit(',')[0])
+		alleleDepth.append(line[i].split(':')[1].aplit(',')[1])
+		print alleleDepth
         if j >= 15:
             for k in range(0,4):
                 if haplotype.count(str(k)) == 1:
@@ -40,6 +43,7 @@ for line in f:
                         mutationCount[Index] = mutationCount[Index]+1
         genotype=[]
         haplotype=[]
+	alleleDepth = []
 
 for i in range(0,len(mutationCount)):	
 	print mutationCount[i]
