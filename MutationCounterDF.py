@@ -14,7 +14,6 @@ GenotypeNum = 30
 f = csv.reader(open(fileInput,"rU"), delimiter='\t')
 genotype = []
 haplotype = []
-alleleDepth = []
 juveniles = []
 mutationCount = [0]*GenotypeNum
 
@@ -35,6 +34,7 @@ for line in f:
                 if haplotype.count(str(k)) == 1:
                     Index = int(haplotype.index(str(k))/2)
                     mutationCount[Index] = mutationCount[Index]+1
+		    print juveniles,juveniles[Index]
                 if haplotype.count(str(k)) == 2:
                     seq = str(k),'/',str(k)
                     homozygote = str(''.join(seq))
@@ -43,7 +43,6 @@ for line in f:
                         mutationCount[Index] = mutationCount[Index]+1
         genotype=[]
         haplotype=[]
-	alleleDepth = []
 	juveniles = []
 
 for i in range(0,len(mutationCount)):	
