@@ -27,8 +27,9 @@ for line in f:
                 genotype.append(line[i].split(':')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[1])
-		alleleDepth.append(line[i].split(':')[1])
-		print alleleDepth
+		if line[i].split(':')[1] != '.':
+			alleleDepth.append(line[i].split(':')[1])
+		print j,alleleDepth
         if j >= 15:
             for k in range(0,4):
                 if haplotype.count(str(k)) == 1:
