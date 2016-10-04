@@ -27,14 +27,14 @@ for line in f:
                 genotype.append(line[i].split(':')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[0])
                 haplotype.append(line[i].split(':')[0].split('/')[1])
-		print len(line[i].split(':')[1].split(',')),line[i].split(':')[1].split(',')
 		juveniles.append(line[i])
         if j >= 15:
             for k in range(0,4):
                 if haplotype.count(str(k)) == 1:
                     Index = int(haplotype.index(str(k))/2)
                     mutationCount[Index] = mutationCount[Index]+1
-		    print juveniles,juveniles[Index]
+		    if juveniles[Index].split(':')[1].split(',')[k] >= 4:
+			print juveniles,juveniles[Index]
                 if haplotype.count(str(k)) == 2:
                     seq = str(k),'/',str(k)
                     homozygote = str(''.join(seq))
