@@ -8,6 +8,7 @@ GenotypeNum = 30
 #Filter out the headers.
 #Filter out the adults genome columns as well as the loci metadata columns.
 #Filter out loci with less than half of the individuals counted.
+#Filter out SNPs with a read depth less than four.
 #Check for individuals with a unique haplotype at that loci.
 #Check for individuals with a unique homozygotic genotype at that loci.
 #Count up each instance for each individual.
